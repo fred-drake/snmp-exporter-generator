@@ -10,4 +10,4 @@ RUN go get github.com/prometheus/snmp_exporter/generator && \
 COPY mibs/ /mibs/
 COPY generator.yml ${GENERATOR_DIR}/generator.yml
 
-RUN cd ${GENERATOR_DIR} && export MIBDIRS=mibs ./generator generate -o /opt/snmp.yml
+RUN cd ${GENERATOR_DIR}; export MIBDIRS=mibs ./generator generate -o /opt/snmp.yml
