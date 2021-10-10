@@ -1,8 +1,7 @@
 # SNMP Exporter Generator
 
 This is a custom built image used to automatically generate the snmp.yml file needed for the Prometheus SNMP exporter.  
-Unlike most containers, this does not process anything during runtime.  Instead, all of the processing is performed once
-when the image is built.
+Unlike most containers, this does not process anything during runtime.  Instead, all of the processing is performed during image creation.
 
 I use this as an init-container for my Prometheus SNMP exporter deployment that resides on my Kubernetes cluster.  It mounts
 the same persistent volume claim as the SNMP exporter, and copies the snmp.yml file.  If the snmp.yml values change, it will
@@ -21,7 +20,7 @@ not support `arm64`.
 
 ## Init-Container Example
 
-Below is my deployment.
+Below is my deployment, which illustrates how I use this image as an init-container, before the actual snmp-exporter container is built.
 
 ```yaml
 apiVersion: apps/v1
@@ -99,3 +98,5 @@ spec:
     protocol: TCP
     targetPort: metrics
 ```
+
+The github repository can be found here: https://github.com/fred-drake/snmp-exporter-generator
