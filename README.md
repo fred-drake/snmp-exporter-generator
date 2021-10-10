@@ -57,7 +57,7 @@ spec:
       initContainers:
       - name: init-config
         image: fdrake/snmp-exporter-generator
-        imatePullPolicy: Always
+        imagePullPolicy: Always
         command:
           - sh
           - -c
