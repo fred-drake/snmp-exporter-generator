@@ -1,4 +1,4 @@
-FROM debian:10
+FROM debian
 
 ARG GENERATOR_DIR=/root/go/src/github.com/prometheus/snmp_exporter/generator
 ENV MIBDIRS ${GENERATOR_DIR}/mibs
