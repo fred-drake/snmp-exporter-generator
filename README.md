@@ -15,7 +15,7 @@ push to Docker hub under the tag `fdrake/snmp-exporter-generator:latest`.
 
 ## Supporting architectures
 
-Both `arm64` and `amd64` are supported.  Note that at the time of this writing, the official `prom/snmp-exporter` image does
+Both `arm64` and `amd64` are supported.  Note that at the time of this writing, the official `prom/snmp-exporter` image for configurator generation does
 not support `arm64`.
 
 ## Init-Container Example
@@ -40,8 +40,7 @@ spec:
     spec:
       volumes:
         - name: config
-          persistentVolumeClaim:
-            claimName: config-vol
+          emptyDir: {}
       containers:
       - name: snmp-exporter
         image: prom/snmp-exporter
@@ -68,20 +67,9 @@ spec:
 
 ```
 
-For completeness, below are my definitions for the persistent volume claim and service.
+For completeness, below is my service definition.
 
 ```yaml
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: config-vol
-  namespace: prometheus
-spec:
-  accessModes: ["ReadWriteOnce"]
-  resources:
-    requests:
-      storage: 1Gi # Overkill, but my ceph storage thin-provisions
----
 # This gets called by Prometheus at http://snmp-exporter.prometheus.svc.cluster.local:9116
 kind: Service
 apiVersion: v1
