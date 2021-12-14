@@ -11,7 +11,7 @@ be automatically picked up upon exporter rebuild.
 
 All supporting MIBs sit in the `mibs` directory, and the `generator.yml` sits in the root of the repository.  The image build
 copies these to the appropriate location in the container.  Upon push to Github, the built-in CI/CD will bake a new image and
-push to Docker hub under the tag `fdrake/snmp-exporter-generator:latest`.
+push to container registry under the tag `ghcr.io/fred-drake/snmp-exporter-generator:latest`.
 
 ## Supporting architectures
 
@@ -55,7 +55,7 @@ spec:
           name: metrics
       initContainers:
       - name: init-config
-        image: fdrake/snmp-exporter-generator
+        image: ghcr.io/fred-drake/snmp-exporter-generator
         imagePullPolicy: Always
         command:
           - sh
@@ -86,5 +86,3 @@ spec:
     protocol: TCP
     targetPort: metrics
 ```
-
-The github repository can be found here: https://github.com/fred-drake/snmp-exporter-generator
